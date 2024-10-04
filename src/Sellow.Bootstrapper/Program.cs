@@ -1,9 +1,12 @@
+using Sellow.Shared.Infrastructure;
+
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddInfrastructure();
 
 var app = builder.Build();
 
-app.UseHttpsRedirection();
+app.MapControllers();
+app.UseInfrastructure();
 
 app.Run();
