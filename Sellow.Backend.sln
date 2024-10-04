@@ -4,6 +4,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{AAECE807-5E0
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sellow.Bootstrapper", "src\Sellow.Bootstrapper\Sellow.Bootstrapper.csproj", "{68E53735-2408-424E-B84E-55EFD1A24042}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{919F5195-B570-43CC-BC9A-59F493BBD4E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sellow.Shared.Abstractions", "src\Shared\Sellow.Shared.Abstractions\Sellow.Shared.Abstractions.csproj", "{9B7D5168-C3EF-4773-A20B-D9ED6B3209FF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sellow.Shared.Abstractions.Tests.Unit", "src\Shared\Sellow.Shared.Abstractions.Tests.Unit\Sellow.Shared.Abstractions.Tests.Unit.csproj", "{895FFF63-DC17-44A5-99A8-A044E00A7B0E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -11,11 +17,22 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{68E53735-2408-424E-B84E-55EFD1A24042} = {AAECE807-5E02-4FA8-8098-32C9F2A8E57A}
+		{919F5195-B570-43CC-BC9A-59F493BBD4E7} = {AAECE807-5E02-4FA8-8098-32C9F2A8E57A}
+		{9B7D5168-C3EF-4773-A20B-D9ED6B3209FF} = {919F5195-B570-43CC-BC9A-59F493BBD4E7}
+		{895FFF63-DC17-44A5-99A8-A044E00A7B0E} = {919F5195-B570-43CC-BC9A-59F493BBD4E7}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{68E53735-2408-424E-B84E-55EFD1A24042}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{68E53735-2408-424E-B84E-55EFD1A24042}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{68E53735-2408-424E-B84E-55EFD1A24042}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{68E53735-2408-424E-B84E-55EFD1A24042}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B7D5168-C3EF-4773-A20B-D9ED6B3209FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B7D5168-C3EF-4773-A20B-D9ED6B3209FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B7D5168-C3EF-4773-A20B-D9ED6B3209FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B7D5168-C3EF-4773-A20B-D9ED6B3209FF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{895FFF63-DC17-44A5-99A8-A044E00A7B0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{895FFF63-DC17-44A5-99A8-A044E00A7B0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{895FFF63-DC17-44A5-99A8-A044E00A7B0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{895FFF63-DC17-44A5-99A8-A044E00A7B0E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
