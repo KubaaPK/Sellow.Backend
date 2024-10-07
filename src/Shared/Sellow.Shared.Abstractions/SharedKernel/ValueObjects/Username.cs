@@ -5,8 +5,8 @@ namespace Sellow.Shared.Abstractions.SharedKernel.ValueObjects;
 
 public sealed record Username
 {
-    private const int MinimumUsernameLength = 3;
-    private const int MaximumUsernameLength = 25;
+    public const int MinimumUsernameLength = 3;
+    public const int MaximumUsernameLength = 25;
 
     public string Value { get; }
 
