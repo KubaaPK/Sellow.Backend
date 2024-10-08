@@ -44,4 +44,17 @@ internal sealed class AuthController : ControllerBase
         var userId = await _sender.Send(command, cancellationToken);
         return Results.Created($"{Request.GetActionUrl()}/users/{userId}", null);
     }
+
+    /// <summary>
+    /// Activates a user.
+    /// </summary>
+    /// <response code="200">User has been successfully activated.</response>
+    /// <response code="422">User cannot be activated: was not found or is already active.</response>
+    /// <response code="500">Internal server error.</response>
+    [HttpGet("auth/activate-user/{id:guid}")]
+    public async Task<IResult> ActivateUser(Guid id, CancellationToken cancellationToken = default)
+    {
+        await _sender.Send(new ActivateUser(id), cancellationToken);
+        return Results.Ok();
+    }
 }
