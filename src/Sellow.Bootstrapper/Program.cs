@@ -1,5 +1,6 @@
 using Sellow.Modules.Auth.Api;
 using Sellow.Modules.EmailSending.Api;
+using Sellow.Modules.Sales.Api;
 using Sellow.Shared.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -7,7 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services
     .AddInfrastructure()
     .AddAuthModule()
-    .AddEmailSendingModule();
+    .AddEmailSendingModule()
+    .AddSalesModule();
 
 var app = builder.Build();
 
@@ -15,6 +17,7 @@ app.MapControllers();
 
 app
     .UseInfrastructure()
-    .UseAuthModule();
+    .UseAuthModule()
+    .UseSalesModule();
 
 app.Run();
