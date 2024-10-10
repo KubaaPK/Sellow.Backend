@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0"/>
+        <PackageReference Include="MediatR" Version="12.4.1"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\..\Shared\Sellow.Shared.Abstractions\Sellow.Shared.Abstractions.csproj"/>
+        <ProjectReference Include="..\Sellow.Modules.Sales.Core\Sellow.Modules.Sales.Core.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <InternalsVisibleTo Include="Sellow.Modules.Sales.Api"/>
+        <InternalsVisibleTo Include="Sellow.Modules.Sales.Application.Tests.Integration"/>
+        <InternalsVisibleTo Include="DynamicProxyGenAssembly2"/>
+    </ItemGroup>
+</Project>

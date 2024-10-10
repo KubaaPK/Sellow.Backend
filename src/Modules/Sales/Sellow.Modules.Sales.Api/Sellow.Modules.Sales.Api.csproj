@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+        <DocumentationFile>bin\Debug\Sellow.Modules.Sales.Api.xml</DocumentationFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <InternalsVisibleTo Include="Sellow.Bootstrapper"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Sellow.Modules.Sales.Application\Sellow.Modules.Sales.Application.csproj"/>
+        <ProjectReference Include="..\Sellow.Modules.Sales.Infrastructure\Sellow.Modules.Sales.Infrastructure.csproj"/>
+    </ItemGroup>
+
+</Project>

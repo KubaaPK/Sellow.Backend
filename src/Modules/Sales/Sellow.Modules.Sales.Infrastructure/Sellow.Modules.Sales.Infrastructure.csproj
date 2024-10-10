@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\..\Shared\Sellow.Shared.Infrastructure\Sellow.Shared.Infrastructure.csproj"/>
+        <ProjectReference Include="..\Sellow.Modules.Sales.Core\Sellow.Modules.Sales.Core.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <InternalsVisibleTo Include="Sellow.Modules.Sales.Api"/>
+        <InternalsVisibleTo Include="Sellow.Modules.Sales.Application.Tests.Integration"/>
+    </ItemGroup>
+</Project>
