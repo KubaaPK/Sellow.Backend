@@ -14,6 +14,7 @@
     <ItemGroup>
         <ProjectReference Include="..\..\..\Shared\Sellow.Shared.Abstractions\Sellow.Shared.Abstractions.csproj"/>
         <ProjectReference Include="..\Sellow.Modules.Sales.Core\Sellow.Modules.Sales.Core.csproj"/>
+        <ProjectReference Include="..\Sellow.Modules.Sales.Infrastructure\Sellow.Modules.Sales.Infrastructure.csproj"/>
     </ItemGroup>
 
     <ItemGroup>

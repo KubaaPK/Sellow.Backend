@@ -45,4 +45,17 @@ internal sealed class CategoryController : ControllerBase
 
         return Results.Created($"{Request.GetActionUrl()}/{categoryId}", null);
     }
+
+    /// <summary>
+    /// Gets all sales categories.
+    /// </summary>
+    /// <response code="201">List with the categories tree.</response>
+    /// <response code="500">Internal server error.</response>
+    [HttpGet]
+    [ProducesResponseType(typeof(IEnumerable<CategoryDto>), 201, "application/json")]
+    public async Task<IResult> GetCategories()
+    {
+        var categories = await _sender.Send(new GetCategories());
+        return Results.Ok(categories);
+    }
 }

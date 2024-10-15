@@ -13,6 +13,7 @@
 
     <ItemGroup>
         <InternalsVisibleTo Include="Sellow.Modules.Sales.Api"/>
+        <InternalsVisibleTo Include="Sellow.Modules.Sales.Application"/>
         <InternalsVisibleTo Include="Sellow.Modules.Sales.Application.Tests.Integration"/>
     </ItemGroup>
 </Project>
