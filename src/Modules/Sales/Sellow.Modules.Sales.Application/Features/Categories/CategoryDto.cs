@@ -26,4 +26,23 @@ internal sealed record CategoryDto(Guid Id, string Name, Guid? ParentId, IEnumer
             subcategories
         );
     }
+
+    public static CategoryDto? FindById(IEnumerable<CategoryDto> categories, Guid id)
+    {
+        foreach (var category in categories)
+        {
+            if (category.Id == id)
+            {
+                return category;
+            }
+
+            var foundCategory = FindById(category.Subcategories, id);
+            if (foundCategory is not null)
+            {
+                return foundCategory;
+            }
+        }
+
+        return null;
+    }
 }

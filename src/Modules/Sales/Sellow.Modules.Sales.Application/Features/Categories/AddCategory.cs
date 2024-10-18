@@ -23,11 +23,14 @@ internal sealed class AddCategoryHandler : IRequestHandler<AddCategory, Guid>
 {
     private readonly ILogger<AddCategoryHandler> _logger;
     private readonly ICategoryRepository _categoryRepository;
+    private readonly IPublisher _publisher;
 
-    public AddCategoryHandler(ILogger<AddCategoryHandler> logger, ICategoryRepository categoryRepository)
+    public AddCategoryHandler(ILogger<AddCategoryHandler> logger, ICategoryRepository categoryRepository,
+        IPublisher publisher)
     {
         _logger = logger;
         _categoryRepository = categoryRepository;
+        _publisher = publisher;
     }
 
     public async Task<Guid> Handle(AddCategory request, CancellationToken cancellationToken)
@@ -51,6 +54,8 @@ internal sealed class AddCategoryHandler : IRequestHandler<AddCategory, Guid>
 
         _logger.LogInformation("Category {@Category} has been added", category);
 
+        await _publisher.Publish(new CategoriesUpdated(), cancellationToken);
+
         return category.Id;
     }
 
@@ -69,6 +74,8 @@ internal sealed class AddCategoryHandler : IRequestHandler<AddCategory, Guid>
         await _categoryRepository.Save(parent, cancellationToken);
 
         _logger.LogInformation("Category {@Category} has been added", subcategory);
+
+        await _publisher.Publish(new CategoriesUpdated(), cancellationToken);
 
         return subcategory.Id;
     }
