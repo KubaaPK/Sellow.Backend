@@ -1,8 +1,6 @@
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
-using Sellow.Modules.Sales.Infrastructure.DAL;
+using Sellow.Modules.Sales.Application.Services;
 
 namespace Sellow.Modules.Sales.Application.Features.Categories;
 
@@ -11,23 +9,17 @@ internal sealed record CategoriesUpdated() : INotification;
 internal sealed class UpdateCategoryCache : INotificationHandler<CategoriesUpdated>
 {
     private readonly ILogger<UpdateCategoryCache> _logger;
-    private readonly SalesDbContext _context;
-    private readonly IMemoryCache _memoryCache;
+    private readonly ICategoryCacheService _categoryCacheService;
 
-    public UpdateCategoryCache(ILogger<UpdateCategoryCache> logger, SalesDbContext context, IMemoryCache memoryCache)
+    public UpdateCategoryCache(ILogger<UpdateCategoryCache> logger, ICategoryCacheService categoryCacheService)
     {
         _logger = logger;
-        _context = context;
-        _memoryCache = memoryCache;
+        _categoryCacheService = categoryCacheService;
     }
 
     public async Task Handle(CategoriesUpdated notification, CancellationToken cancellationToken)
     {
-        var categories = await _context.Categories.ToListAsync(cancellationToken);
-
-        var categoriesDto = CategoryDto.BuildCategoryTree(categories);
-
-        _memoryCache.Set("Sales/Categories", categoriesDto);
+        await _categoryCacheService.UpdateCategoriesInCache(cancellationToken);
 
         _logger.LogInformation("Categories cache has been updated");
     }

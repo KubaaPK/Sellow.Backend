@@ -1,7 +1,5 @@
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Caching.Memory;
-using Sellow.Modules.Sales.Infrastructure.DAL;
+using Sellow.Modules.Sales.Application.Services;
 
 namespace Sellow.Modules.Sales.Application.Features.Categories;
 
@@ -9,28 +7,13 @@ internal sealed class GetCategories : IRequest<IEnumerable<CategoryDto>>;
 
 internal sealed class GetCategoriesHandler : IRequestHandler<GetCategories, IEnumerable<CategoryDto>>
 {
-    private readonly SalesDbContext _context;
-    private readonly IMemoryCache _memoryCache;
+    private readonly ICategoryCacheService _categoryCacheService;
 
-    public GetCategoriesHandler(SalesDbContext context, IMemoryCache memoryCache)
+    public GetCategoriesHandler(ICategoryCacheService categoryCacheService)
     {
-        _context = context;
-        _memoryCache = memoryCache;
+        _categoryCacheService = categoryCacheService;
     }
 
     public async Task<IEnumerable<CategoryDto>> Handle(GetCategories request, CancellationToken cancellationToken)
-    {
-        if (_memoryCache.Get("Sales/Categories") is not null)
-        {
-            return _memoryCache.Get<IEnumerable<CategoryDto>>("Sales/Categories") ?? Array.Empty<CategoryDto>();
-        }
-
-        var categories = await _context.Categories.ToListAsync(cancellationToken);
-
-        var categoriesDto = CategoryDto.BuildCategoryTree(categories);
-
-        _memoryCache.Set("Sales/Categories", categoriesDto);
-
-        return categoriesDto;
-    }
+        => await _categoryCacheService.GetCategories(cancellationToken);
 }
