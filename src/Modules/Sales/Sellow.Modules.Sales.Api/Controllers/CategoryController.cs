@@ -49,13 +49,27 @@ internal sealed class CategoryController : ControllerBase
     /// <summary>
     /// Gets all sales categories.
     /// </summary>
-    /// <response code="201">List with the categories tree.</response>
+    /// <response code="200">List with the categories tree.</response>
     /// <response code="500">Internal server error.</response>
     [HttpGet]
-    [ProducesResponseType(typeof(IEnumerable<CategoryDto>), 201, "application/json")]
-    public async Task<IResult> GetCategories()
+    [ProducesResponseType(typeof(IEnumerable<CategoryDto>), 200, "application/json")]
+    public async Task<IResult> GetCategories(CancellationToken cancellationToken = default)
     {
-        var categories = await _sender.Send(new GetCategories());
+        var categories = await _sender.Send(new GetCategories(), cancellationToken);
         return Results.Ok(categories);
+    }
+
+    /// <summary>
+    /// Get a single category
+    /// </summary>
+    /// <response code="200">A single category.</response>
+    /// <response code="404">Category was not found.</response>
+    /// <response code="500">Internal server error.</response>
+    [HttpGet("{id:guid}")]
+    [ProducesResponseType(typeof(CategoryDto), 200, "application/json")]
+    public async Task<IResult> GetCategory(Guid id, CancellationToken cancellationToken = default)
+    {
+        var category = await _sender.Send(new GetCategory(id), cancellationToken);
+        return Results.Ok(category);
     }
 }
