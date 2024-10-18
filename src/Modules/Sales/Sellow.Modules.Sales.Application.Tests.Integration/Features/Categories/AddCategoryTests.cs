@@ -1,3 +1,4 @@
+using MediatR;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
 using Sellow.Modules.Sales.Application.Features.Categories;
@@ -54,16 +55,29 @@ public sealed class AddCategoryTests : IDisposable
         await Assert.ThrowsAsync<DuplicatedSubcategoryException>(() => Act(command));
     }
 
+    [Fact]
+    internal async Task should_publish_an_update_cache_event_when_category_has_been_added()
+    {
+        await _testDatabase.Init();
+        var command = new AddCategory("Elektronika", null);
+        await Act(command);
+
+        await _publisher.Received(1).Publish(Arg.Any<CategoriesUpdated>());
+    }
+
     #region Arrange
 
     private readonly TestDatabase _testDatabase;
     private readonly AddCategoryHandler _handler;
+    private readonly IPublisher _publisher;
 
     public AddCategoryTests()
     {
         _testDatabase = new TestDatabase();
+        _publisher = Substitute.For<IPublisher>();
         ICategoryRepository categoryRepository = new CategoryRepository(_testDatabase.Context);
-        _handler = new AddCategoryHandler(Substitute.For<ILogger<AddCategoryHandler>>(), categoryRepository);
+        _handler = new AddCategoryHandler(Substitute.For<ILogger<AddCategoryHandler>>(), categoryRepository,
+            _publisher);
     }
 
     #endregion
